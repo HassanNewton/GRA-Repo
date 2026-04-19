@@ -1,0 +1,25 @@
+{
+  "films": [
+    {
+      "id": "3",
+      "title": "The Matrix",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 8,
+          "review": "A revolutionary sci-fi film with groundbreaking special effects and a thought-provoking plot."
+        },
+        {
+          "id": 2,
+          "rating": 9,
+          "review": "The Matrix redefined the sci-fi genre with its innovative visual effects and compelling story."
+        },
+        {
+          "id": 3,
+          "rating": 7,
+          "review": "An impressive film that combines philosophical themes with thrilling action."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+/* Allmän styling för applikationen */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+
+
+/* Filmlista */
+.film-list {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Filmkomponenten */
+.film {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.film h3 {
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.film p {
+  color: #666;
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.film button {
+  background-color: #dc143c;
+  /* Crimson color */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.film button:hover {
+  background-color: #b21c33;
+}
+
+/* Formulär */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input[type="number"] {
+  width: 50%;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  /* Green for submit button */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Layout för formulär och knappar */
+.form-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add-review-form {
+  max-width: 500px;
+  width: 100%;
+  margin-top: 20px;
+
+}
+
+.add-film-form {
+
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+/* För att ge varje komponent lite luft och ordning */
+.component-container {
+  margin-top: 20px;
+}
+
+.component-container>div {
+  margin-bottom: 20px;
+}
+
+.film-list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
