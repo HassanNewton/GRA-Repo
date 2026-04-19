@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dryckhanterare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sip n Save</h1>
+        <form id="drink-form">
+            <input type="text" id="name" placeholder="Namn" required>
+            <input type="text" id="type" placeholder="Typ (Smoothie, Cocktail...)" required>
+            <input type="text" id="description" placeholder="Beskrivning" required>
+            <button type="submit">Lägg till Dryck</button>
+        </form>
+        <ul id="drink-list"></ul>
+        <window id="drink-description"></window>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

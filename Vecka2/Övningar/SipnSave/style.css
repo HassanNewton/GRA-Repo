@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url(smoothie2.jpg);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+.container {
+  background: rgba(235, 232, 232, 0.863);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  text-align: center;
+}
+h1 {
+  color: #28520f;
+  font-weight: 100;
+}
+input,
+button {
+  width: 80%;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #026402;
+  background-color: #ddd;
+}
+button {
+  background-color: #026402;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  width: 50%;
+}
+button:hover {
+  background-color: #10a003;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: #eee;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: lighter;
+}
+li:hover {
+  background: #ddd;
+}
+.delete-btn {
+  background: rgba(167, 165, 165, 0.863);
+  border: none;
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+  width: 20%;
+  margin-left: 30%;
+}

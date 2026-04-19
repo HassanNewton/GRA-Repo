@@ -1,0 +1,16 @@
+{
+  "drinks": [
+    {
+      "id": "1",
+      "name": "Mango Smoothie",
+      "type": "Smoothie",
+      "description": "En härligt krämig smoothie med mango och yoghurt."
+    },
+    {
+      "id": "ac8b",
+      "name": "Avocado shake",
+      "type": "smoothie",
+      "description": "green shake"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+/* Bakgrund och grundläggande styling */
+body {
+  background-color: #1e1e1e;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("warhammer-40k-img.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  /* Justera opaciteten här */
+  z-index: -1;
+  /* Se till att bakgrunden ligger bakom allt innehåll */
+}
+
+/* Container för alla enheter */
+.unit-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Grundläggande styling för unit-card */
+.unit-card {
+  width: 30%;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Styling för deployed och not deployed */
+.deployed {
+  background: linear-gradient(145deg, #4b0f0f, #7a1818);
+  border: 2px solid crimson;
+  box-shadow: 0 0 20px crimson;
+}
+
+.not-deployed {
+  background: linear-gradient(145deg, #1b1b1b, #2e2e2e);
+  border: 2px solid gray;
+  box-shadow: 0 0 10px gray;
+}
+
+/* Hover-effekt */
+.unit-card:hover {
+  transform: scale(1.05);
+}
+
+/* Beskrivning */
+.unit-description {
+  font-style: italic;
+  color: #bbb;
+}
+
+/* Knapp-styling */
+.btn {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.btn.deploy {
+  background-color: green;
+  color: white;
+}
+
+.btn.recall {
+  background-color: orange;
+  color: white;
+}
+
+.btn.remove {
+  background-color: darkred;
+  color: white;
+}
+
+.btn.edit {
+  background-color: blue;
+  color: white;
+}
+
+.btn.decimate {
+  background-color: purple;
+  color: white;
+}
+
+/* Hover-effekter */
+.btn:hover {
+  filter: brightness(1.2);
+}
+
+/* Decimate-sektion */
+.decimate-section {
+  margin-top: 10px;
+}
+
+.decimate-input {
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+}
+
+.unit-List {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+
+}
+
+button {
+  font-size: 1rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #969595;
+  font-weight: bold;
+}
+
+p {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+}
+
+input,
+textarea {
+  font-size: 1.2rem;
+}

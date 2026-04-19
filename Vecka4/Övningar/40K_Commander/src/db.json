@@ -1,0 +1,28 @@
+{
+    "units": [
+        {
+            "id": 1,
+            "name": "Tactical Squad",
+            "type": "Space Marine",
+            "count": 10,
+            "description": "A versatile unit equipped with bolters.",
+            "deployed": false
+        },
+        {
+            "id": 2,
+            "name": "Assault Squad",
+            "type": "Space Marine",
+            "count": 5,
+            "description": "A fast attack unit equipped with jump packs.",
+            "deployed": false
+        },
+        {
+            "id": 3,
+            "name": "Devastator Squad",
+            "type": "Space Marine",
+            "count": 5,
+            "description": "A heavy support unit equipped with heavy weapons.",
+            "deployed": false
+        }
+    ]
+}
