@@ -1,0 +1,124 @@
+@font-face {
+  font-family: "Harry";
+
+  src: url(harry_p/HARRYP__.TTF);
+}
+
+/* Globala inställningar */
+body {
+  background-image: url("background.jpeg");
+  font-family: "Harry";
+  /* Gamla bokstavsval */
+  color: #3e2a47;
+  /* Mörk lila textfärg */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+}
+
+/* För att arrangera spellbook och add-spell-form horisontellt */
+.spell-book-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  /* Lägg till lite mellanrum mellan spellbook och add-spell-form */
+  width: 100%;
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+h1 {
+  color: #2b2118;
+}
+
+/* SpellBook-container */
+.spell-book {
+  background: #ddd5ad;
+  /* Ljusgul bakgrund */
+  border: 10px solid #2b2118;
+  /* Mörkramen */
+  border-radius: 20px;
+  padding: 2rem;
+  flex: 1;
+  /* För att spellbooken ska ta så mycket plats som möjligt */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cast-button {
+  background-color: #2b2118;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  font-family: "harry";
+  font-size: 1.5rem;
+}
+
+/* Styling för AddSpellForm */
+.add-spell-form {
+  background-color: #ddd5ad;
+  border: 10px solid #2b2118;
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: auto;
+  /* Begränsa bredden på formuläret */
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  font-size: 2rem;
+  /* Gör att AddSpellForm också får plats utan att bli för trångt */
+}
+
+/* Behåll samma stil för AddSpellForm */
+.add-spell-form h2 {
+  text-align: center;
+  color: #2b2118;
+  font-weight: bold;
+}
+
+.add-spell-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-spell-form input,
+.add-spell-form textarea {
+  width: 80%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #8b3a62;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.add-spell-form button {
+  background-color: #2b2118;
+  color: white;
+  border: none;
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  font-family: "harry";
+  font-size: 2rem;
+}
+
+.add-spell-form button:hover {
+  background-color: #7a2c50;
+}
