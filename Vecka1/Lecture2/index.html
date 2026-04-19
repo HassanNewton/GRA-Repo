@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flexbox + Responsiv + Animation</title>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome ikoner -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --primary: #2e86ab;
+  --dark: #0d1b2a;
+  --light: #f0f4f8;
+  --accent: #06d6a0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--light);
+  line-height: 1.6;
+}
+
+/* Viktigt: synlig fokus för tangentbord */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+/*
+TILLGÄNGLIGHET:
+- :focus-visible → visar var du är med tangentbord
+- bra kontrast mellan text och bakgrund
+- använd riktiga HTML-element (button, nav, h1)
+*/
+
+
+/* Vad är en CSS-variabel bra för?
+Varför resetar vi margin/padding? */
+
+.navbar {
+  background: var(--dark);
+  color: white;
+  padding: 15px;
+}
+
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--primary);
+  color: white;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* Vad känns “fel” utan transition?
+Vad gör transition egentligen? */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 30px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+/* Vad händer när skärmen blir mindre?
+Varför använder vi media queries? */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeUp 0.5s ease both;
+}
+
+/* Vad gör animation vs transition?
+När använder man keyframes? */
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="navbar-inner">
+    <h1>Min Sida</h1>
+   <nav class="nav-links">
+  <a href="#">
+    <i class="fa-solid fa-house" aria-hidden="true"></i>
+    Home
+  </a>
+  <a href="#">
+    <i class="fa-solid fa-code" aria-hidden="true"></i>
+    Projects
+  </a>
+  <a href="#">
+    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+    Contact
+  </a>
+</nav>
+  </div>
+</header>
+
+<!-- “Varför aria-hidden på ikoner?”
+För att ikoner är bara visuella – texten ska läsas upp, inte ikonen. -->
+
+<!-- Vad gör flexbox här som block inte kan?
+Vad händer om vi tar bort justify-content? -->
+
+<section class="hero">
+  <h2>Jag bygger webbsidor</h2>
+  <p>Flexbox i praktiken</p>
+
+  <button class="btn" aria-label="Se mina projekt" > 
+  <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+  Klicka
+</button>
+</section>
+
+<!-- Hur centrerar vi utan flexbox?
+Varför är flex bättre än text-align + margin tricks? -->
+
+<section class="grid" tabindex="0">
+  <div class="card">Projekt 1</div>
+  <div class="card">Projekt 2</div>
+  <div class="card">Projekt 3</div>
+</section>
+
+<!-- Vad är skillnaden mellan grid och flexbox?
+När skulle du välja grid? -->

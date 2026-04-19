@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do App (JSON Server + LocalStorage)</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; }
+    li { display: flex; justify-content: space-between; margin: 5px 0; }
+    .done { text-decoration: line-through; color: gray; }
+  </style>
+</head>
+<body>
+
+<h1>To-Do App</h1>
+
+<input id="taskInput" placeholder="Ny uppgift">
+<button onclick="addTask()">Lägg till</button>
+
+<select id="filter" onchange="saveFilter(); renderTasks()">
+  <option value="all">Alla</option>
+  <option value="completed">Klara</option>
+  <option value="active">Ej klara</option>
+</select>
+
+<ul id="taskList"></ul>
+
+<script>
+const API_URL = "http://localhost:3000/tasks";
+let tasks = [];
+
+// ================= GET =================
+async function getTasks() {
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error("Fel vid hämtning");
+    tasks = await res.json();
+    renderTasks();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// ================= POST =================
+async function addTask() {
+  const input = document.getElementById("taskInput");
+  const title = input.value;
+  if (!title) return;
+
+  await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, completed: false })
+  });
+
+  input.value = "";
+  getTasks();
+}
+
+// ================= PATCH =================
+async function toggleTask(task) {
+  await fetch(`${API_URL}/${task.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ completed: !task.completed })
+  });
+
+  getTasks();
+}
+
+// ================= DELETE =================
+async function deleteTask(id) {
+  if (!confirm("Radera uppgift?")) return;
+
+  await fetch(`${API_URL}/${id}`, {
+    method: "DELETE"
+  });
+
+  getTasks();
+}
+
+// ================= RENDER =================
+function renderTasks() {
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  const filter = localStorage.getItem("filter") || "all";
+
+  let filtered = tasks;
+  if (filter === "completed") {
+    filtered = tasks.filter(t => t.completed);
+  } else if (filter === "active") {
+    filtered = tasks.filter(t => !t.completed);
+  }
+
+  filtered.forEach(task => {
+    const li = document.createElement("li");
+
+    const span = document.createElement("span");
+    span.textContent = task.title;
+    if (task.completed) span.classList.add("done");
+
+    span.onclick = () => toggleTask(task);
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "X";
+    delBtn.onclick = () => deleteTask(task.id);
+
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    list.appendChild(li);
+  });
+}
+
+// ================= LOCALSTORAGE =================
+function saveFilter() {
+  const value = document.getElementById("filter").value;
+  localStorage.setItem("filter", value);
+}
+
+function loadFilter() {
+  const saved = localStorage.getItem("filter");
+  if (saved) {
+    document.getElementById("filter").value = saved;
+  }
+}
+
+// ================= INIT =================
+loadFilter();
+getTasks();
+</script>
+
+</body>
+</html>

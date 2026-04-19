@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <!-- lang="sv" VIKTIGT: Skärläsare läser korrekt språk och betoning -->
+  <head>
+    <meta charset="UTF-8" />
+    <!-- viewport MÅSTE ha initial-scale för att prevent-zoom funkar på mobil -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Colmar Academy</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+  </head>
+  <body>
+    <!-- ============================================================
+         NAVIGERING - MOBILE FIRST: Börjar med mobil layout
+         Visar bara ikoner på små skärmar, text på större
+         ============================================================ -->
+
+    <!-- MOBILE NAV: Primär nav för små skärmar -->
+    <nav class="navbar" aria-label="Huvudnavigering">
+      <div class="navbar__logo">
+        <img
+          src="resources/photos/ic-logo.svg"
+          alt="Colmar Academy logotyp"
+          class="navbar__logo-icon"
+        />
+        <!-- Gömt på mobil, synlig på desktop via CSS -->
+        <span class="navbar__title-text">
+          <strong>COLMAR</strong><span class="navbar__title-secondary">ACADEMY</span>
+        </span>
+      </div>
+
+      <!-- PEDAGOGISK NOTERING: aria-label gör hamburger-meny tillgänglig för skärläsare
+           Utan det kan användare inte veta vad knappen gör -->
+      <button
+        class="navbar__menu-btn"
+        aria-label="Öppna navigeringsmeny"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+      >
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+
+      <ul class="navbar__menu" id="nav-menu">
+        <li><a href="#" class="navbar__link">På campus</a></li>
+        <li><a href="#" class="navbar__link">Online</a></li>
+        <li><a href="#" class="navbar__link">Våra företag</a></li>
+        <li><a href="#" class="navbar__link">Logga in</a></li>
+      </ul>
+    </nav>
+
+    <!-- ============================================================
+         BANNER SEKTION - Learn something new
+         ============================================================ -->
+    <main>
+      <section class="banner">
+        <img
+          src="resources/photos/banner.jpg"
+          alt="Studenter i klassrum som diskuterar"
+          class="banner__image"
+        />
+        <!-- PEDAGOGISK NOTERING: alt-text ska beskriva ÖVErflödigt innehål,
+             inte upprepa vad man redan vet. "Banner" är dåligt,
+             "Studenter som diskuterar" är bra -->
+        <div class="banner__content">
+          <h1 class="banner__heading">Lär dig något<br />nytt varje dag</h1>
+          <p class="banner__text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+          <!-- VIKTIGT: <a> inside <button> = DUBBEL funktion. 
+               Använd bara <a href> eller bara <button onclick>.
+               Här: använd bara <a> med button-styling -->
+          <a href="#" class="btn btn--primary">Börja här</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================
+         PRACTICE SECTION - "Det hjälper att träna"
+         Mobile: En kolumn. Desktop: Två kolumner
+         ============================================================ -->
+    <section class="practice">
+      <div class="practice__left">
+        <img
+          src="resources/photos/information-main.jpg"
+          alt="Student tränar på dator"
+          class="practice__image"
+        />
+        <div class="practice__text-block">
+          <h2>Det hjälper inte att träna</h2>
+          <!-- PEDAGOGISK NOTERING: <blockquote> + <cite> = semantisk HTML
+               För skärläsare och SEO vet att detta är ett citat -->
+          <blockquote class="practice__quote">
+            <p>
+              "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima
+              quaerat enim eveniet, necessitatibus ab saepe fugiat nostrum placeat
+              vero magnam maiores harum numquam nobis non."
+            </p>
+            <cite class="practice__citation">Emanuel, Sr Strategist på Hiring.com</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- PEDAGOGISK NOTERING: <aside> = content relaterat men INTE central del av page.
+           Perfekt för "related articles" sektion -->
+      <aside class="practice__right" aria-label="Relaterad information">
+        <!-- MOBILE FIRST: En kort per rad på mobil.
+             Desktop: Tre kort i kolumn. Se CSS -->
+
+        <!-- KORT 1 -->
+        <article class="card card--highlight">
+          <img
+            src="resources/photos/information-orientation-mobile.jpg"
+            alt="Orienteringsmöte startsida"
+            class="card__image"
+          />
+          <div class="card__content">
+            <h3 class="card__heading">Orienteringsdatum</h3>
+            <p class="card__meta">Tis 10/11 & Ons 10/12: 08:00-15:00</p>
+            <a href="#" class="card__link">Läs mer</a>
+          </div>
+        </article>
+
+        <!-- KORT 2 -->
+        <article class="card card--highlight">
+          <img
+            src="resources/photos/information-campus-mobile.jpg"
+            alt="Campus byggnad utsida"
+            class="card__image"
+          />
+          <div class="card__content">
+            <h3 class="card__heading">Våra campuses</h3>
+            <p class="card__meta">Hitta vilken campus som ligger nära dig</p>
+            <a href="#" class="card__link">Läs mer</a>
+          </div>
+        </article>
+
+        <!-- KORT 3 -->
+        <article class="card card--highlight">
+          <img
+            src="resources/photos/information-guest-lecture-mobile.jpg"
+            alt="Föreläsare Oliver Slack på scenen"
+            class="card__image"
+          />
+          <div class="card__content">
+            <h3 class="card__heading">Gästföreläsning</h3>
+            <p class="card__meta">
+              Keynote med Oliver Slack om musik i medicinsk behandling
+            </p>
+            <a href="#" class="card__link">Läs mer</a>
+          </div>
+        </article>
+      </aside>
+    </section>
+
+    <!-- ============================================================
+         START LEARNING SECTION - Kurskatalog
+         Mobile: Buttonlista. Desktop: Kortgalleri
+         ============================================================ -->
+    <section class="courses">
+      <h1 class="courses__heading">Börja lära dig</h1>
+
+      <!-- PEDAGOGISK NOTERING: <ul> för lista av kurser, inte <div>
+           Skärläsare säger "Lista med 6 objekt" = tydligare navigering -->
+      <ul class="courses__grid">
+        <!-- KURS 1: Software Engineering -->
+        <li>
+          <article class="course-card">
+            <img
+              src="resources/photos/course-software.jpg"
+              alt="Webbutvecklare arbetar på laptop"
+              class="course-card__image"
+            />
+            <div class="course-card__content">
+              <h2 class="course-card__title">Mjukvaruteknik</h2>
+              <p class="course-card__label">KURSER</p>
+              <p class="course-card__description">
+                Webbutveckling, Mobilutveckling, IoT, APIs
+              </p>
+            </div>
+          </article>
+        </li>
+
+        <!-- KURS 2: Computer Art -->
+        <li>
+          <article class="course-card">
+            <img
+              src="resources/photos/course-computer-art.jpg"
+              alt="Grafisk design med färgglada former"
+              class="course-card__image"
+            />
+            <div class="course-card__content">
+              <h2 class="course-card__title">Datorkonst</h2>
+              <p class="course-card__label">KURSER</p>
+              <p class="course-card__description">
+                Bildbehandling & design, Webbdesign, Motion Graphics & VFX,
+                Datoranimation
+              </p>
+            </div>
+          </article>
+        </li>
+
+        <!-- KURS 3: Design -->
+        <li>
+          <article class="course-card">
+            <img
+              src="resources/photos/course-design.jpg"
+              alt="UX designer skissar wireframes på whiteboard"
+              class="course-card__image"
+            />
+            <div class="course-card__content">
+              <h2 class="course-card__title">Design</h2>
+              <p class="course-card__label">KURSER</p>
+              <p class="course-card__description">
+                UX-design, Användarforskning, Visuell design
+              </p>
+            </div>
+          </article>
+        </li>
+
+        <!-- KURS 4: Data -->
+        <li>
+          <article class="course-card">
+            <img
+              src="resources/photos/course-data.jpg"
+              alt="Dataanalytiker visar grafer på skärm"
+              class="course-card__image"
+            />
+            <div class="course-card__content">
+              <h2 class="course-card__title">Data</h2>
+              <p class="course-card__label">KURSER</p>
+              <p class="course-card__description">
+                Data Science, Big Data, SQL, Datavisualisering
+              </p>
+            </div>
+          </article>
+        </li>
+
+        <!-- KURS 5: Business -->
+        <li>
+          <article class="course-card">
+            <img
+              src="resources/photos/course-business.jpg"
+              alt="Affärsmeeting med team runt konferensbord"
+              class="course-card__image"
+            />
+            <div class="course-card__content">
+              <h2 class="course-card__title">Affär</h2>
+              <p class="course-card__label">KURSER</p>
+              <p class="course-card__description">
+                Produktutveckling, Affärsutveckling, Startups
+              </p>
+            </div>
+          </article>
+        </li>
+
+        <!-- KURS 6: Marketing -->
+        <li>
+          <article class="course-card">
+            <img
+              src="resources/photos/course-marketing.jpg"
+              alt="Marknadsföringsanalytiker studerar data på flera skärmar"
+              class="course-card__image"
+            />
+            <div class="course-card__content">
+              <h2 class="course-card__title">Marknadsföring</h2>
+              <p class="course-card__label">KURSER</p>
+              <p class="course-card__description">
+                Analys, Content Marketing, Mobilmarknadsföring
+              </p>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================
+         THESIS EXHIBIT SECTION
+         Mobile: Bara video. Desktop: Video + två artiklar
+         ============================================================ -->
+    <section class="thesis">
+      <h1 class="thesis__heading">Examensuppsatser</h1>
+
+      <div class="thesis__container">
+        <!-- Huvudvideo -->
+        <div class="thesis__main">
+          <video
+            src="resources/videos/thesis.mp4"
+            controls
+            class="thesis__video"
+            poster="resources/photos/thesis-poster.jpg"
+          >
+            <!-- Fallback för gamla browsers -->
+            Din webbläsare stöder inte video. Ladda ner videon istället.
+          </video>
+          <div class="thesis__main-text">
+            <h2>Föreställ dig stadsmiljö på nytt</h2>
+            <p>
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+              atque doloremque quasi, fuga maxime explicabo perspiciatis impedit
+              sequi repellendus ducimus, quod ex optio debitis beatae illum ea
+              quidem voluptatum ab."
+            </p>
+          </div>
+        </div>
+
+        <!-- PEDAGOGISK NOTERING: Denna sektion visas bara på desktop (se CSS)
+             Mobile users ser bara videon ovan -->
+        <aside class="thesis__related" aria-label="Relaterade examensarbeten">
+          <article class="thesis__card thesis__card--featured">
+            <img
+              src="resources/photos/thesis-fisma.jpg"
+              alt="Fisma produktprototyp: minimalistisk design"
+              class="thesis__card-image"
+            />
+            <div class="thesis__card-content">
+              <h3>Fisma: Design & Prototyp</h3>
+              <p>Designerportfolio av nya prototyper</p>
+            </div>
+          </article>
+
+          <article class="thesis__card">
+            <img
+              src="resources/photos/thesis-now-and-then.jpg"
+              alt="Arkitektonisk jämförelse New York då och nu"
+              class="thesis__card-image"
+            />
+            <div class="thesis__card-content">
+              <h3>Nu och då</h3>
+              <p>Forskningsstudie om New York</p>
+            </div>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+      <div class="footer__content">
+        <p class="footer__copyright">
+          &copy; 2024 Colmar Academy. Alla rättigheter förbehållna
+        </p>
+        <nav class="footer__links" aria-label="Footer navigering">
+          <a href="#">Villkor</a>
+          <a href="#">Integritet</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
