@@ -1,0 +1,419 @@
+/**
+ * SIGNUPFORM.CSS
+ * 
+ * PEDAGOGISK FÖRKLARING:
+ * Denna fil innehåller all styling för signup-formulären.
+ * 
+ * KRAV 4: DYNAMISK STYLING
+ * Vi använder className för att applicera olika stilar baserat på state:
+ * - .input-error - röd kant när input har fel
+ * - .submit-button:disabled - grå och inaktiv knapp
+ * - .user-card.editing - speciell stil när vi redigerar
+ * - .user-card - smooth animering när kort läggs till
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ================================
+   HUVUDCONTAINER
+   ================================ */
+.signup-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.signup-container h1 {
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 2.5em;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ================================
+   FORMULÄR STYLING
+   ================================ */
+.signup-form {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  border: 2px solid #e9ecef;
+}
+
+.signup-form h2 {
+  color: #495057;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+/* ================================
+   FORM-GRUPPER (LABEL + INPUT + ERROR)
+   ================================ */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+/* ================================
+   INPUT-FÄLT
+   ================================ */
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+/* Input fokus - när användaren klickar in i fältet */
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background-color: #f0f4ff;
+}
+
+/* 
+  KRAV 4 & 5: INPUT MED FEL
+  Röd kant när validering misslyckades
+*/
+.form-input.input-error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.form-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* ================================
+   FELMEDDELANDEN
+   ================================ */
+/* KRAV 5: Visa felmeddelanden */
+.error-message {
+  color: #dc3545;
+  font-size: 0.85em;
+  margin-top: 5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  animation: slideIn 0.3s ease;
+}
+
+.error-message::before {
+  content: "⚠️";
+}
+
+/* Smooth animation för felmeddelanden */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   KNAPPAR
+   ================================ */
+/* Basknapp-styling */
+.submit-button,
+.cancel-button,
+.edit-button,
+.delete-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+/* ================================
+   SKAPA KONTO-KNAPP
+   ================================ */
+.submit-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* Hover-effekt när knappen är aktiv */
+.submit-button:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* 
+  KRAV 2: INAKTIV KNAPP
+  Grå och ouppsägbar när formulären inte är giltigt
+*/
+.submit-button:disabled {
+  background: #ccc;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ================================
+   AVBRYT-KNAPP
+   ================================ */
+.cancel-button {
+  background: #6c757d;
+  color: white;
+  margin-top: 10px;
+}
+
+.cancel-button:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   ANVÄNDARE-SEKTION
+   ================================ */
+.users-section {
+  margin-top: 50px;
+}
+
+.users-section h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+}
+
+/* Meddelande när det inte finns några användare */
+.no-users {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.1em;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  font-style: italic;
+}
+
+/* ================================
+   GRID FÖR ANVÄNDARKORT
+   ================================ */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Responsiv grid - mindre skärmar */
+@media (max-width: 768px) {
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   ANVÄNDARKORT - STYLING
+   ================================ */
+.user-card {
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  /* BONUS: Smooth animering när kort läggs till */
+  animation: cardSlideIn 0.4s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* BONUS: Animering när kort visas */
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover-effekt på kort */
+.user-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Speciell stil när man redigerar ett kort */
+.user-card.editing {
+  border-color: #ffc107;
+  background: #fffbf0;
+  box-shadow: 0 5px 20px rgba(255, 193, 7, 0.2);
+}
+
+/* ================================
+   ANVÄNDARINFORMATION
+   ================================ */
+.user-info {
+  margin-bottom: 15px;
+}
+
+.user-name {
+  color: #333;
+  font-size: 1.4em;
+  margin-bottom: 8px;
+}
+
+.user-email {
+  color: #6c757d;
+  font-size: 0.95em;
+  word-break: break-all;
+}
+
+.user-email strong {
+  color: #495057;
+}
+
+/* ================================
+   ÅTGÅRDS-KNAPPAR (EDIT & DELETE)
+   ================================ */
+.user-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  border-top: 1px solid #e9ecef;
+  padding-top: 15px;
+}
+
+/* REDIGERA-KNAPP */
+.edit-button {
+  background: #17a2b8;
+  color: white;
+  flex: 1;
+}
+
+.edit-button:hover {
+  background: #138496;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(23, 162, 184, 0.3);
+}
+
+/* TA BORT-KNAPP */
+/* KRAV 6: Delete-knapp */
+.delete-button {
+  background: #dc3545;
+  color: white;
+  flex: 1;
+}
+
+.delete-button:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+}
+
+/* Animation när knapp klickas */
+.delete-button:active,
+.edit-button:active {
+  transform: translateY(0);
+}
+
+/* ================================
+   RESPONSIV DESIGN
+   ================================ */
+@media (max-width: 600px) {
+  .signup-container {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .signup-container h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .signup-form {
+    padding: 15px;
+  }
+
+  .form-input,
+  .submit-button {
+    padding: 10px 12px;
+    font-size: 0.95em;
+  }
+
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .user-actions {
+    flex-direction: column;
+  }
+
+  .user-actions button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* ================================
+   ACCESSIBILITY
+   ================================ */
+/* För användare som navigerar med tangentbord */
+.form-input:focus-visible,
+.submit-button:focus-visible,
+.edit-button:focus-visible,
+.delete-button:focus-visible {
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Print-stil */
+@media print {
+  body {
+    background: white;
+  }
+
+  .signup-form {
+    display: none;
+  }
+
+  .user-actions button {
+    display: none;
+  }
+}
