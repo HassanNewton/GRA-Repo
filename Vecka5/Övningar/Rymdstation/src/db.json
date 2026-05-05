@@ -1,0 +1,56 @@
+{
+    "sections": [
+        {
+            "id": 1,
+            "name": "Control Room",
+            "description": "The central command center of the station.",
+            "interestingFact": "The control room has a panoramic view of the surrounding space.",
+            "currentCrew": [
+                "Captain Smith",
+                "Lieutenant Garcia",
+                "Ensign Lee"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Engineering",
+            "description": "The area responsible for the maintenance of the station's systems.",
+            "interestingFact": "Engineering is the only section on the station with a zero-gravity work environment.",
+            "currentCrew": [
+                "Chief Engineer Patel",
+                "Assistant Engineer Nguyen"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Science Lab",
+            "description": "The area dedicated to scientific research and experimentation.",
+            "interestingFact": "The science lab boasts the station's largest collection of plant specimens.",
+            "currentCrew": [
+                "Lead Scientist Kim",
+                "Researcher Davis",
+                "Researcher Singh"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Medical Bay",
+            "description": "The area dedicated to medical care and treatment.",
+            "interestingFact": "The medical bay is equipped with a state-of-the-art holographic surgical system.",
+            "currentCrew": [
+                "Chief Medical Officer Chen",
+                "Nurse Anderson"
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Living Quarters",
+            "description": "The area where the crew resides and relaxes when off-duty.",
+            "interestingFact": "The living quarters are decorated with art created by previous station crews.",
+            "currentCrew": [
+                "Communications Officer Rodriguez",
+                "Chef Baker"
+            ]
+        }
+    ]
+}

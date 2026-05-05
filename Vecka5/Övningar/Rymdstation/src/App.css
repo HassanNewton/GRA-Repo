@@ -1,0 +1,111 @@
+/* General Styles for all pages */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+button {
+  background-color: #DC143C;
+  /* Crimson */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #B22222;
+  /* Darker Crimson */
+}
+
+/* Portal Page Styles */
+.portal {
+  background-color: #875e5e;
+  /* Dark Red background for Portal */
+  color: white;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.portal h1 {
+  font-size: 3rem;
+}
+
+.portal form {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent form background */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.portal form input,
+.portal form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.portal form button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Section Page Styles */
+.section-details {
+  background-color: #2F4F4F;
+  /* Dark Slate Gray background for Section Details */
+  color: white;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.section-details h2 {
+  font-size: 2.5rem;
+}
+
+.section-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.section-details ul li {
+  margin: 5px 0;
+}
+
+/* Individual Section Styles */
+.section {
+  background-color: #D3D3D3;
+  /* LightGray background for section cards */
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  font-size: 1.8rem;
+}
+
+.section p {
+  color: #333;
+  font-size: 1rem;
+}
+
+.section button {
+  background-color: #DC143C;
+  /* Crimson */
+}
+
+.section button:hover {
+  background-color: #B22222;
+  /* Darker Crimson */
+}

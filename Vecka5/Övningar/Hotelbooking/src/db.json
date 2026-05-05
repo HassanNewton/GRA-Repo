@@ -1,0 +1,232 @@
+{
+  "hotels": [
+    {
+      "id": "1",
+      "name": "Grand Hotel",
+      "location": "Miami, FL",
+      "image": "https://images.unsplash.com/photo-1578774337542-d480965f3943?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1322&q=80",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 4,
+          "comment": "Great location and friendly staff!"
+        },
+        {
+          "id": 2,
+          "rating": 3,
+          "comment": "Rooms were a bit small and noisy."
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "type": "Standard",
+          "price": 100,
+          "booked": false
+        },
+        {
+          "id": 2,
+          "type": "Deluxe",
+          "price": 200,
+          "booked": true
+        },
+        {
+          "id": 3,
+          "type": "Suite",
+          "price": 300,
+          "booked": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Beachfront Resort",
+      "location": "Los Angeles, CA",
+      "image": "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 4,
+          "comment": "Amazing views and great amenities!"
+        },
+        {
+          "id": 2,
+          "rating": 3,
+          "comment": "Rooms were a bit outdated."
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "type": "Standard",
+          "price": 150,
+          "booked": false
+        },
+        {
+          "id": 2,
+          "type": "Deluxe",
+          "price": 250,
+          "booked": false
+        },
+        {
+          "id": 3,
+          "type": "Suite",
+          "price": 350,
+          "booked": true
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Rustic Inn",
+      "location": "Columbus, OH",
+      "image": "https://images.unsplash.com/photo-1523688471150-efdd09f0f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 3,
+          "comment": "Nice location but facilities could use some work."
+        },
+        {
+          "id": 2,
+          "rating": 2,
+          "comment": "Rooms were not very clean."
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "type": "Standard",
+          "price": 80,
+          "booked": false
+        },
+        {
+          "id": 2,
+          "type": "Deluxe",
+          "price": 150,
+          "booked": false
+        },
+        {
+          "id": 3,
+          "type": "Suite",
+          "price": 250,
+          "booked": false
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Luxury Hotel",
+      "location": "New York, NY",
+      "image": "https://images.unsplash.com/photo-1590447158019-883d8d5f8bc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 5,
+          "comment": "Amazing hotel with great amenities!"
+        },
+        {
+          "id": 2,
+          "rating": 4,
+          "comment": "Rooms were a bit small, but overall a great experience."
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "type": "Standard",
+          "price": 200,
+          "booked": false
+        },
+        {
+          "id": 2,
+          "type": "Deluxe",
+          "price": 300,
+          "booked": false
+        },
+        {
+          "id": 3,
+          "type": "Suite",
+          "price": 500,
+          "booked": false
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Varbergs Vandrarhem 2",
+      "location": "Miami, FL",
+      "image": "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 4,
+          "comment": "Great location and beautiful views!"
+        },
+        {
+          "id": 2,
+          "rating": 4,
+          "comment": "Rooms were a bit outdated, but still a great stay."
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "type": "Standard",
+          "price": 150,
+          "booked": false
+        },
+        {
+          "id": 2,
+          "type": "Deluxe",
+          "price": 250,
+          "booked": false
+        },
+        {
+          "id": 3,
+          "type": "Suite",
+          "price": 400,
+          "booked": false
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "City Hotel",
+      "location": "Chicago, IL",
+      "image": "https://images.unsplash.com/photo-1633035956877-fcf87f6605b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80",
+      "reviews": [
+        {
+          "id": 1,
+          "rating": 3,
+          "comment": "Rooms were clean, but facilities could use some work."
+        },
+        {
+          "id": 2,
+          "rating": 2,
+          "comment": "Not the best hotel, but it was okay for a short stay."
+        }
+      ],
+      "rooms": [
+        {
+          "id": 1,
+          "type": "Standard",
+          "price": 100,
+          "booked": true
+        },
+        {
+          "id": 2,
+          "type": "Deluxe",
+          "price": 200,
+          "booked": false
+        },
+        {
+          "id": 3,
+          "type": "Suite",
+          "price": 350,
+          "booked": false
+        }
+      ]
+    }
+  ]
+}

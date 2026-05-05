@@ -1,0 +1,72 @@
+{
+    "characters": [
+        {
+            "id": 1,
+            "name": "Ahri",
+            "description": "En nio-svansad räv som använder magi för att förföra och förgöra sina fiender.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/thumb/Ahri_Render.png/1280px-Ahri_Render.png?415ad",
+            "region": "Ionia"
+        },
+        {
+            "id": 2,
+            "name": "Yasuo",
+            "description": "En skicklig svärdsmän från Ionia som använder vinden i sin kamp.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/Yasuo_Render.png?557cf",
+            "region": "Ionia"
+        },
+        {
+            "id": 3,
+            "name": "Jinx",
+            "description": "En galen uppfinnare med en kärlek för explosioner och kaos.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/thumb/Jinx_Render.png/320px-Jinx_Render.png?e32d9",
+            "region": "Zaun"
+        },
+        {
+            "id": 4,
+            "name": "Garen",
+            "description": "En lojal krigare från Demacia som kämpar för rättvisa och ära.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/Garen_Render.png?f3f0e",
+            "region": "Demacia"
+        },
+        {
+            "id": 5,
+            "name": "Ekko",
+            "description": "En ung uppfinnare som kan manipulera tiden för att överlista sina fiender.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/thumb/Ekko_Render.png/800px-Ekko_Render.png?a5f6a",
+            "region": "Zaun"
+        },
+        {
+            "id": 6,
+            "name": "Darius",
+            "description": "En brutal krigare från Noxus som krossar sina fiender med rå styrka.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/thumb/Darius_Render.png/800px-Darius_Render.png?bd7f4",
+            "region": "Noxus"
+        }
+    ],
+    "regions": [
+        {
+            "id": 1,
+            "name": "Ionia",
+            "description": "En mystisk och spirituell ögrupp med en rik historia.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/thumb/Ionia_The_Placidium.jpg/1920px-Ionia_The_Placidium.jpg?d2405"
+        },
+        {
+            "id": 2,
+            "name": "Noxus",
+            "description": "Ett imperium som värdesätter styrka och expansion.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/Noxus_The_Immortal_Bastion_01.jpg?8ae0d"
+        },
+        {
+            "id": 3,
+            "name": "Demacia",
+            "description": "Ett rike som hedrar ära, rättvisa och lojalitet.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/Demacia_Hall_Of_Valor.jpg?a6a06"
+        },
+        {
+            "id": 4,
+            "name": "Zaun",
+            "description": "En underjordisk stad fylld av experimentell teknologi och kemisk innovation.",
+            "image": "https://wiki.leagueoflegends.com/en-us/images/Zaun_Life_Survives_In_The_Depth.jpg?e98dd"
+        }
+    ]
+}
