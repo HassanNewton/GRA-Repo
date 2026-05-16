@@ -1,5 +1,4 @@
 # CORS & JWT Explained Simply
-## Vad behöver studenterna veta?
 
 ---
 
@@ -15,7 +14,7 @@ Frontend försöker ansluta till Backend
 ```
 
 ### Lösning
-**Tell backend: "Tillåt frontend att ansluta"**
+**Säg till backend: "Tillåt frontend att ansluta"**
 
 **Backend: server.js**
 ```javascript
@@ -40,7 +39,7 @@ Utan bevis = vilken som helst kan säga att de är John.
 ```
 
 ### Lösning
-**Backend ger en hemlig "biljett" (token) vid login.**
+**Backend skapar passerkort (token) vid login.**
 
 ### Flow
 
@@ -62,7 +61,7 @@ Utan bevis = vilken som helst kan säga att de är John.
 
 ---
 
-## 🔑 Token Innehål (simpel version)
+## 🔑 Token Innehåll (simpel version)
 
 ```javascript
 {
@@ -78,7 +77,6 @@ Utan bevis = vilken som helst kan säga att de är John.
 **Backend vet:**
 - Vilken user det är
 - Att token inte är förfalskad (signerad)
-- Att token inte är uppförfalskad
 
 ---
 
