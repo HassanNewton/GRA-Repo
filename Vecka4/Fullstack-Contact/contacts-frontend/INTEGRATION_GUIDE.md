@@ -149,7 +149,7 @@ npm start
 
 Frontend öppnas på: **http://localhost:3000**
 
-> ⚠️ **OBS**: Se till att backend körs på **http://localhost:3000** (eller justera `API_BASE` i `api.js`)
+> ⚠️ **OBS**: Se till att backend körs på en ANNAN port typ **http://localhost:5000** 
 
 ---
 
