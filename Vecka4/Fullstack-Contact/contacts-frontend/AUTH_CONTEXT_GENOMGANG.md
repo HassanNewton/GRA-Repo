@@ -31,7 +31,7 @@ Det fungerar. Men det är en **bro byggd med window-events** för att låta en m
 
 Problemet: **React vet inte om att localStorage har ändrats.**
 
-Lösningen ni valt: skicka ett custom event på `window` och låta `App.js` lyssna på det.
+Lösningen: skicka ett custom event på `window` och låta `App.js` lyssna på det.
 
 ```js
 // api.js – skickar signalen
@@ -248,15 +248,3 @@ const [user, setUser] = useState(() => {
 });
 ```
 
----
-
-## Sammanfattning
-
-Din nuvarande lösning med `authChange`-eventet är **genomtänkt och fungerar**. Det är ett klassiskt mönster för att kommunicera ut ur ett icke-React-lager och in i React.
-
-AuthContext hade gjort koden:
-- Mer "React-nativ" (ingen window-kommunikation)
-- Lättare att skala upp (fler komponenter, mer data)
-- Enklare att testa (mocka context istället för localStorage + events)
-
-Men valet är inte antingen/eller. Du kan ha **båda**: behåll `api.js` som en ren HTTP-modul utan React-koppling, och låt AuthContext vara bryggan mellan `api.js` och komponentträdet.
