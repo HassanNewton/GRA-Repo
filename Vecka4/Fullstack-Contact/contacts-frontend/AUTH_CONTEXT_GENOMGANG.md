@@ -1,250 +1,337 @@
-# Auth, Context och hur vi kan bygga vidare
+# Auth & Context – steg-för-steg genomgång
 
-## Hur fungerar lösningen idag?
-
-Nuvarande arkitektur bygger på tre delar som samarbetar:
-
-```
-localStorage  ──▶  api.js (saveToken / logout)
-                       │
-               window.dispatchEvent("authChange")
-                       │
-               App.js lyssnar via addEventListener
-                       │
-               setAuthed(isAuthenticated())  ──▶  re-render
-```
-
-### Flödet steg för steg
-
-1. Användaren loggar in → `Login.jsx` anropar `saveToken(data.token)`
-2. `saveToken` sparar token i `localStorage` **och** skickar ett custom `authChange`-event på `window`
-3. `App.js` lyssnar på det eventet och kör `setAuthed(isAuthenticated())` → navbaren uppdateras
-4. När användaren loggar ut → `logout()` i `api.js` gör samma sak i omvänd ordning
-
-Det fungerar. Men det är en **bro byggd med window-events** för att låta en modul utanför React (`api.js`) kommunicera med React-trädet.
+> Alla originalfiler är orörda. Jämför varje "Före"-fil med sin "Efter"-fil.
+>
+> | Original | Med Context |
+> | --- | --- |
+> | `App.js` | `AppWithContext.jsx` |
+> | `Login.jsx` | `LoginWithContext.jsx` |
+> | `Contacts.jsx` | `ContactsWithContext.jsx` |
+> | – | `AuthContext.jsx` (ny fil) |
 
 ---
 
-## Varför finns `onAuthChange`-eventet överhuvudtaget?
+## Varför ändrar vi något alls?
 
-`api.js` är inte en React-komponent. Den har inget `useState`, inget `useEffect`, ingen koppling till komponentträdet. Men `App.js` behöver veta när auth-läget ändras för att kunna re-rendera navbaren.
+Nuvarande kod fungerar, men har ett designproblem: `api.js` är en vanlig JavaScript-modul, **utanför React**. När `saveToken()` eller `logout()` körs vet React inte om det.
 
-Problemet: **React vet inte om att localStorage har ändrats.**
-
-Lösningen: skicka ett custom event på `window` och låta `App.js` lyssna på det.
+Lösningen i originalfilen är att skicka ett custom event på `window`:
 
 ```js
-// api.js – skickar signalen
-window.dispatchEvent(new Event("authChange"));
-
-// App.js – tar emot signalen
-window.addEventListener("authChange", onAuthChange);
+// api.js (original)
+window.dispatchEvent(new Event("authChange"));  // ← signal ut ur api.js
 ```
 
-Det är ett **giltigt mönster**, men det är en workaround. AuthContext är det mer Reaktiva sättet att lösa samma problem.
+```js
+// App.js (original)
+window.addEventListener("authChange", onAuthChange);  // ← fångar signalen
+```
+
+Det fungerar, men det är en **bro utanför React**. AuthContext löser samma problem helt inuti React.
 
 ---
 
-## Vad är AuthContext och när ska det användas?
+## Steg 1 – Ny fil: `AuthContext.jsx`
 
-React Context är ett sätt att dela state **direkt i komponentträdet** utan att behöva skicka props manuellt genom varje nivå (prop drilling).
-
-### Utan Context (props drilling)
-```
-App  ──authed──▶  Nav  ──authed──▶  NavLink
-```
-
-### Med Context
-```
-AuthProvider  (håller authed, login, logout)
-    ├── Nav          (läser direkt via useContext)
-    ├── Login        (läser direkt via useContext)
-    └── Contacts     (läser direkt via useContext)
-```
-
-### Använd AuthContext när:
-- Flera komponenter på olika nivåer behöver auth-state
-- Du vill slippa importera `logout` / `saveToken` direkt från `api.js` i varje komponent
-- Du vill kunna byta ut auth-logik (t.ex. byta från localStorage till cookies) på ett ställe
-- Appen växer och fler sidor behöver veta om användaren är inloggad
-
-### Håll dig till nuvarande lösning när:
-- Det bara är en komponent (`App.js`) som behöver auth-state
-- Appen är liten och enkelriktad
-- Du lär dig grunderna och vill hålla det enkelt
-
-**Din nuvarande lösning är inte fel** – den är faktiskt bra för den storleken appen har nu. Men om appen växer är AuthContext nästa naturliga steg.
-
----
-
-## Hur hade AuthContext sett ut i detta projekt?
-
-### Steg 1 – Skapa `AuthContext.jsx`
+> Denna fil finns inte i originalet. Den är grunden för hela förändringen.
 
 ```jsx
 import React, { createContext, useContext, useState } from "react";
-import { isAuthenticated, saveToken, logout } from "./api";
+import { isAuthenticated, saveToken, logout as apiLogout } from "./api";
 
-// Skapar själva context-objektet
 const AuthContext = createContext(null);
 
-// Provider-komponenten som omsluter hela appen
 export function AuthProvider({ children }) {
   const [authed, setAuthed] = useState(isAuthenticated());
 
-  function handleLogin(token) {
-    saveToken(token);       // sparar i localStorage
-    setAuthed(true);        // uppdaterar React-state direkt
+  function login(token) {
+    saveToken(token);   // sparar token i localStorage (samma som förut)
+    setAuthed(true);    // uppdaterar React-state direkt – inget window-event
   }
 
-  function handleLogout() {
-    logout();               // tar bort från localStorage
-    setAuthed(false);       // uppdaterar React-state direkt
+  function logout() {
+    apiLogout();        // tar bort token (samma som förut)
+    setAuthed(false);   // uppdaterar React-state direkt
   }
 
   return (
-    <AuthContext.Provider value={{ authed, login: handleLogin, logout: handleLogout }}>
+    <AuthContext.Provider value={{ authed, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Custom hook – enklare att använda i komponenter
 export function useAuth() {
   return useContext(AuthContext);
 }
 ```
 
-### Steg 2 – Wrappa appen i `index.js` eller `App.js`
+**Varför gör vi så här?**
+
+`AuthProvider` är en vanlig React-komponent som håller `authed`-state. Alla komponenter som är barn till den kan läsa `authed`, `login()` och `logout()` via `useAuth()` – utan att behöva ta emot dem som props.
+
+---
+
+## Steg 2 – `index.js`: Wrappa appen
+
+> `index.js` ändras bara på ett ställe: `AuthProvider` läggs till runt `<App />`.
 
 ```jsx
-// index.js
-import { AuthProvider } from "./AuthContext";
-
+// FÖRE
 root.render(
-  <AuthProvider>
+  <React.StrictMode>
     <App />
-  </AuthProvider>
+  </React.StrictMode>
+);
+
+// EFTER
+root.render(
+  <React.StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>
 );
 ```
 
-### Steg 3 – Använd `useAuth()` i komponenterna
+**Varför här?** `AuthProvider` måste vara förälder till alla komponenter som ska använda `useAuth()`. Genom att lägga den i `index.js` täcker den hela appen.
+
+---
+
+## Steg 3 – `App.js` → `AppWithContext.jsx`
+
+Jämför dessa två versioner sida vid sida.
+
+### Före (`App.js`)
 
 ```jsx
-// Login.jsx – istället för att importera saveToken direkt
-import { useAuth } from "./AuthContext";
+import React, { useEffect, useState } from "react";
+import { isAuthenticated } from "./api";
 
-function Login() {
-  const { login } = useAuth();
+function App() {
+  const [authed, setAuthed] = useState(isAuthenticated());
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const data = await api.login({ email, password });
-    if (data.token) {
-      login(data.token);   // ← Context sköter resten
-      navigate("/contacts");
+  useEffect(() => {
+    function onAuthChange() {
+      setAuthed(isAuthenticated());
     }
-  }
+    window.addEventListener("authChange", onAuthChange);
+    window.addEventListener("storage", onAuthChange);
+
+    return () => {
+      window.removeEventListener("authChange", onAuthChange);
+      window.removeEventListener("storage", onAuthChange);
+    };
+  }, []);
+
+  // ...
 }
 ```
 
+### Efter (`AppWithContext.jsx`)
 ```jsx
-// Contacts.jsx – istället för att importera logout direkt
-import { useAuth } from "./AuthContext";
-
-function Contacts() {
-  const { logout } = useAuth();
-
-  function doLogout() {
-    logout();
-    navigate("/");
-  }
-}
-```
-
-```jsx
-// App.js – drastiskt förenklat
+import React from "react";
 import { useAuth } from "./AuthContext";
 
 function App() {
   const { authed } = useAuth();
-  // Inget useEffect, inga window.addEventListener
-  // authed uppdateras automatiskt när login/logout körs
+  // Det är allt. Inget useState, inget useEffect, inga lyssnare.
+  // ...
 }
+```
+
+**Vad försvann och varför?**
+
+| Borttaget | Varför det inte behövs |
+|---|---|
+| `useState(isAuthenticated())` | `authed` lever nu i Context |
+| `useEffect(...)` | Inga lyssnare behövs längre |
+| `window.addEventListener(...)` | Context triggar re-render direkt |
+| `window.removeEventListener(...)` | Cleanup-funktionen behövs inte |
+
+---
+
+## Steg 4 – `Login.jsx` → `LoginWithContext.jsx`
+
+Det enda som ändras är **en rad**: hur token sparas efter inloggning.
+
+### Före (`Login.jsx`)
+```jsx
+import api, { saveToken } from "./api";
+
+// ...
+
+if (data.token) {
+  saveToken(data.token);  // ← importerat direkt från api.js
+  navigate("/contacts");
+}
+```
+
+### Efter (`LoginWithContext.jsx`)
+```jsx
+import api from "./api";
+import { useAuth } from "./AuthContext";
+
+// ...
+
+const { login } = useAuth();
+
+// ...
+
+if (data.token) {
+  login(data.token);  // ← kommer från Context
+  navigate("/contacts");
+}
+```
+
+**Vad händer när `login(data.token)` körs?**
+
+```
+LoginWithContext.jsx
+  └── login(token)              ← anropar Context-funktionen
+        ├── saveToken(token)    ← sparar i localStorage (som förut)
+        └── setAuthed(true)     ← React uppdaterar alla som lyssnar på authed
+              └── AppWithContext.jsx re-renderar → navbaren visar "Contacts"
+```
+
+Jämför med det gamla flödet:
+
+```
+Login.jsx
+  └── saveToken(token)
+        └── window.dispatchEvent("authChange")  ← skickar ut ur React
+              └── App.js lyssnar
+                    └── setAuthed(isAuthenticated())  ← React uppdaterar
+```
+
+Samma slutresultat, men Context-vägen sker helt inuti React utan omvägen via `window`.
+
+---
+
+## Steg 5 – `Contacts.jsx` → `ContactsWithContext.jsx`
+
+Exakt samma mönster som Login, fast för logout.
+
+### Före (`Contacts.jsx`)
+```jsx
+import api, { logout } from "./api";
+
+// ...
+
+function doLogout() {
+  logout();       // ← importerat direkt från api.js
+  navigate("/");
+}
+```
+
+### Efter (`ContactsWithContext.jsx`)
+```jsx
+import api from "./api";
+import { useAuth } from "./AuthContext";
+
+// ...
+
+const { logout } = useAuth();
+
+function doLogout() {
+  logout();       // ← kommer från Context
+  navigate("/");
+}
+```
+
+**Vad händer när `logout()` körs?**
+
+```
+ContactsWithContext.jsx
+  └── logout()               ← anropar Context-funktionen
+        ├── apiLogout()      ← tar bort token från localStorage
+        └── setAuthed(false) ← React uppdaterar → navbaren döljer "Contacts"
 ```
 
 ---
 
-## Vad händer med `authChange`-eventet?
+## Helhetsbilden – vad ändrades totalt?
 
-Med AuthContext behövs det **inte längre**. Istället för att:
+```
+ORIGINAL                          MED CONTEXT
+─────────────────────────────     ─────────────────────────────
+api.js                            api.js  (oförändrad)
+  ├── saveToken()                   ├── saveToken()
+  │     └── window.dispatchEvent    │     (inga events längre)
+  └── logout()                      └── logout()
+        └── window.dispatchEvent          (inga events längre)
 
-1. `api.js` dispatchar ett event på `window`
-2. `App.js` lyssnar och uppdaterar sin state
+App.js                            AuthContext.jsx  (ny)
+  ├── useState(authed)               ├── useState(authed)
+  └── useEffect                      ├── login()  → saveToken + setAuthed(true)
+        ├── addEventListener          └── logout() → apiLogout + setAuthed(false)
+        └── removeEventListener
+                                  AppWithContext.jsx
+                                    └── const { authed } = useAuth()
 
-Gör vi:
+Login.jsx                         LoginWithContext.jsx
+  └── saveToken(token)              └── login(token)  ← från useAuth()
 
-1. `login()` i Context sätter `setAuthed(true)` direkt
-2. React uppdaterar alla komponenter som använder `useAuth()` automatiskt
-
-`window.addEventListener` och `window.dispatchEvent` kan tas bort helt.
+Contacts.jsx                      ContactsWithContext.jsx
+  └── logout()                       └── logout()     ← från useAuth()
+```
 
 ---
 
-## Jämförelse sida vid sida
+## En sak som är lika i båda versionerna
 
-| | Nuvarande lösning | Med AuthContext |
-|---|---|---|
-| Auth-state bor i | `App.js` (useState) | `AuthContext` (useState) |
-| Kommunikation | `window` custom events | React state direkt |
-| Importerar från | `api.js` i varje komponent | `useAuth()` hook |
-| Antal lyssnare | 2 (authChange + storage) | 0 |
-| Skalbarhet | Bra för liten app | Bättre för större app |
-| Testbarhet | Lite svårare (window events) | Enklare (mock context) |
-
----
-
-## Hur kan vi bygga vidare?
-
-### Nästa steg 1 – Lägg till `user` i Context
-
-När backend skickar tillbaka mer än token (t.ex. namn och email):
+`RequireAuth` i `App.js` / `AppWithContext.jsx` anropar fortfarande `isAuthenticated()` direkt:
 
 ```jsx
+function RequireAuth({ children }) {
+  if (!isAuthenticated())
+    return <Navigate to="/" replace />;
+  return children;
+}
+```
+
+Det är **medvetet**. `RequireAuth` körs synkront när React renderar rutten. Den läser direkt från `localStorage` och det fungerar lika bra med eller utan Context. Det är ett enkelt skydd och behöver inte bli mer komplext.
+
+---
+
+## Nästa möjliga steg att bygga vidare på
+
+### Lägg till `user` i Context
+
+Backend kan skicka tillbaka mer än token (namn, email). Spara det i Context:
+
+```jsx
+// AuthContext.jsx
 const [user, setUser] = useState(null);
 
-function handleLogin(token, userData) {
+function login(token, userData) {
   saveToken(token);
   setUser(userData);
   setAuthed(true);
 }
 
-// I komponenter:
+// I en komponent:
 const { user } = useAuth();
-// <p>Inloggad som {user.name}</p>
+// <p>Välkommen, {user.name}!</p>
 ```
 
-### Nästa steg 2 – Automatisk utloggning vid 401
+### Automatisk utloggning vid 401
 
-I `api.js`, om backend svarar med 401 (unauthorized):
-
-```js
-if (res.status === 401) {
-  logout();
-  window.dispatchEvent(new Event("authChange")); // eller bättre: Context callback
-}
-```
-
-Med Context kan du istället skicka in en `onUnauthorized`-callback från Context till `api.js`.
-
-### Nästa steg 3 – Persistent user (refresh-säker)
-
-Spara user-data i localStorage precis som token, och läs upp det vid start:
+Om backend svarar med 401 (token utgången) ska användaren loggas ut automatiskt.
+Med Context kan `api.js` ta emot en callback:
 
 ```jsx
-const [user, setUser] = useState(() => {
-  const stored = localStorage.getItem("user");
-  return stored ? JSON.parse(stored) : null;
-});
+// AuthContext.jsx
+useEffect(() => {
+  // Registrerar en global callback som api.js kan anropa
+  window.__authLogout = logout;
+  return () => { window.__authLogout = null; };
+}, []);
 ```
 
+```js
+// api.js
+if (res.status === 401 && window.__authLogout) {
+  window.__authLogout();
+}
+```
